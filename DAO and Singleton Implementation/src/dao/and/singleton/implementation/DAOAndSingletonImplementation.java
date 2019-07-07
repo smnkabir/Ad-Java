@@ -26,11 +26,11 @@ import java.util.Random;
 public class DAOAndSingletonImplementation {
 
     public DAOAndSingletonImplementation() {
-        Student student = null;
+//        Student student = null;
         /**
          * * Database Part **
          */
-        StudentDAO daoObj = new StudentDAOMysqlImplementation();
+//        StudentDAO daoObj = new StudentDAOMysqlImplementation();
 
 //        student = daoObj.create(new Student("2016000000096","Nazmul Kabir"));
 //        System.out.println(student);
@@ -55,7 +55,7 @@ public class DAOAndSingletonImplementation {
         /**
          * * File IO **
          */
-        daoObj = new StudentDAOFileImplementation();
+//        daoObj = new StudentDAOFileImplementation();
 
 //        daoObj.create(new Student("2016000000096","Nazmul Kabir"));
 //        student = daoObj.retrieve("2016000000096");
@@ -69,20 +69,20 @@ public class DAOAndSingletonImplementation {
         
         //** Faculty Mysql implementation **//
         
-        FacultyDAO obj = new FacultyDAOMysqlImplementation();
+//        FacultyDAO obj = new FacultyDAOMysqlImplementation();
 //        obj.create(new Faculty ("nk","Nazmul Kabir","Lecturer"));
         
 //        System.out.println(obj.retrieve("nk"));
         
         //** Faculty File Implementation **//
         
-        obj = new FacultyDAOFileImplementation();
+//        obj = new FacultyDAOFileImplementation();
 //        obj.create(new Faculty ("nk","Nazmul Kabir","Lecturer"));
-        obj.delete("nk");
+//        obj.delete("nk");
         
         //** Course mysql implementaiton **//
         
-        CourseDAO courseDAO = new CourseDAOMysqlImplementation();
+//        CourseDAO courseDAO = new CourseDAOMysqlImplementation();
 //        courseDAO.create(new Course("CSE4047","Advance Java",3));
 
     }
