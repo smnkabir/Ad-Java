@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao.and.singleton.implementation;
+package dao.and.singleton.implementation.student;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -30,7 +30,7 @@ public class StudentDAOFileImplementation implements StudentDAO {
         studentList = read();
         studentList.add(student);
         write();
-        return null;
+        return retrieve(student.getId());
     }
 
     @Override
@@ -49,7 +49,7 @@ public class StudentDAOFileImplementation implements StudentDAO {
 
     @Override
     public List<Student> retrieve(Predicate<Student> predicate) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return retrieve().stream().filter(predicate).collect(Collectors.toList());
     }
 
     @Override
@@ -88,8 +88,8 @@ public class StudentDAOFileImplementation implements StudentDAO {
         List<Student> studentList = null;
         try {
             //        RandomAccessFile input = new RandomAccessFile("input.txt", "r");
-            studentList = Files.lines(Paths.get("data.txt")).map(line -> {
-                String[] s = line.split(";");
+            studentList = Files.lines(Paths.get("student.txt")).map(line -> {
+                String[] s = line.split(",");
                 Student st = new Student(s[0], s[1]);
                 return st;
             }).collect(Collectors.toList());
@@ -102,10 +102,11 @@ public class StudentDAOFileImplementation implements StudentDAO {
 
     private void write() {
         try {
-            RandomAccessFile output = new RandomAccessFile("data.txt", "rw");
+            RandomAccessFile output = new RandomAccessFile("student.txt", "rw");
             output.setLength(0);
+            studentList.stream().forEach(System.out :: println);
             studentList.stream().map(student -> {
-                String line = student.getId() + ";" + student.getName() + "\n";
+                String line = student.getId() + "," + student.getName() + "\n";
                 return line;
             }).forEach(line -> {
                 try {
@@ -115,6 +116,16 @@ public class StudentDAOFileImplementation implements StudentDAO {
                 }
             });
 
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(StudentDAOFileImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(StudentDAOFileImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void delete(){
+        try {
+            RandomAccessFile output = new RandomAccessFile("student.txt", "rw");
+            output.setLength(0);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(StudentDAOFileImplementation.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

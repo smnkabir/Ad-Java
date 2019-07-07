@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao.and.singleton.implementation;
+package dao.and.singleton.implementation.student;
 
+import dao.and.singleton.implementation.DBConnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,12 +15,13 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  *
  * @author nk
  */
-public class StudentDAOMysql implements StudentDAO {
+public class StudentDAOMysqlImplementation implements StudentDAO {
 
     // private Connection connection = DBConnection.getConnection();
 
@@ -34,7 +36,7 @@ public class StudentDAOMysql implements StudentDAO {
             statement.executeUpdate(query);
             student = retrieve(student.getId());
         } catch (SQLException ex) {
-            Logger.getLogger(StudentDAOMysql.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StudentDAOMysqlImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return student;
@@ -51,7 +53,7 @@ public class StudentDAOMysql implements StudentDAO {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(StudentDAOMysql.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StudentDAOMysqlImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
         return student;
     }
@@ -69,25 +71,25 @@ public class StudentDAOMysql implements StudentDAO {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(StudentDAOMysql.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StudentDAOMysqlImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
         return studentList;
     }
 
     @Override
     public List<Student> retrieve(Predicate<Student> predicate) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return retrieve().stream().filter(predicate).collect(Collectors.toList());
     }
 
     @Override
     public Student update(String studentId, Student student) {
-        if (studentId.equals(student.getName())) {
+        if (studentId.equals(student.getId())) {
             try {
                 query = "UPDATE student SET name = '" + student.getName() + "' where id = '" + studentId + "';";
                 statement.executeUpdate(query);
                 student = retrieve(studentId);
             } catch (SQLException ex) {
-                Logger.getLogger(StudentDAOMysql.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(StudentDAOMysqlImplementation.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return student;
@@ -101,7 +103,22 @@ public class StudentDAOMysql implements StudentDAO {
             executeUpdate = statement.executeUpdate(query);
 
         } catch (SQLException ex) {
-            Logger.getLogger(StudentDAOMysql.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StudentDAOMysqlImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (executeUpdate > 0) {
+            return true;
+        }
+        return false;
+
+    }
+    public boolean delete() {
+        int executeUpdate = 0;
+        try {
+            query = "DELETE FROM student;";
+            executeUpdate = statement.executeUpdate(query);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentDAOMysqlImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (executeUpdate > 0) {
             return true;

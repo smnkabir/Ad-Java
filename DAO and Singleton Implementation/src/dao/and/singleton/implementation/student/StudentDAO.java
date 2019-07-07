@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao.and.singleton.implementation;
+package dao.and.singleton.implementation.student;
 
 import java.util.List;
 import java.util.function.Predicate;

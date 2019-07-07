@@ -2,12 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/home/nk/NetBeansProjects/DAO%20and%20Singleton%20Implementation/src/dao/and/singleton/implementation/Student.java</file>
-            <file>file:/home/nk/NetBeansProjects/DAO%20and%20Singleton%20Implementation/src/dao/and/singleton/implementation/DAOAndSingletonImplementation.java</file>
-            <file>file:/home/nk/NetBeansProjects/DAO%20and%20Singleton%20Implementation/src/dao/and/singleton/implementation/DBConnection.java</file>
-            <file>file:/home/nk/NetBeansProjects/DAO%20and%20Singleton%20Implementation/src/dao/and/singleton/implementation/StudentDAO.java</file>
-            <file>file:/home/nk/NetBeansProjects/DAO%20and%20Singleton%20Implementation/src/dao/and/singleton/implementation/StudentDAOMysql.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
